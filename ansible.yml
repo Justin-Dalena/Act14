@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: Update ubuntu server
+    tags: always
+    apt:
+      upgrade: dist
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  roles:
+    - role: glance
+    - role: keystone
+    - role: nova
